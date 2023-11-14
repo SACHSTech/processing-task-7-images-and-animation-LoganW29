@@ -1,13 +1,24 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Sketch extends PApplet {
 	
-	
+	PImage imgPumpkin; 
+  PImage imgBackground; 
+
+  float fltPumpkinX = 100;
+  float fltPumpkinY = 100; 
+
+  float fltBackgroundX;
+  float fltBackgroundY; 
+
+  float fltSpeedX = 5; 
+  float fltSpeedY = 4; 
+
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
-	// put your size call here
     size(400, 400);
   }
 
@@ -16,21 +27,32 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+
+    imgPumpkin = loadImage("pumpkin.png");
+    imgPumpkin.resize(50, 50); 
+
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
+	  background(0);
+    image(imgPumpkin, fltPumpkinX, fltPumpkinY);
+   
+    fltPumpkinX += fltSpeedX;
+    fltPumpkinY += fltSpeedY;
+    
+    if (fltPumpkinX == 0 || fltPumpkinX > width - 50) {
+      fltSpeedX *= -1;
+    }
+    if (fltPumpkinY == 0  || fltPumpkinY > height - 50) {
+      fltSpeedY *= -1;
+    }
 
-    stroke(255);
-    line(50, 125, 70, 50);  
+}
   }
   
   // define other methods down here.
-}
+
+
