@@ -9,11 +9,16 @@ public class Sketch extends PApplet {
   float fltPumpkinX = 100;
   float fltPumpkinY = 100; 
 
-  float fltBackgroundX;
-  float fltBackgroundY; 
+  float fltBackgroundX = 0;
+  float fltBackgroundY = 0; 
 
-  float fltSpeedX = 5; 
-  float fltSpeedY = 4; 
+  float fltCircleX = 200; 
+  float fltCircleY = 200;
+
+  float fltPumpSpeedX = 5; 
+  float fltPumpSpeedY = 4; 
+  
+  float fltCircleSpeedY = 3; 
 
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -31,25 +36,40 @@ public class Sketch extends PApplet {
     imgPumpkin = loadImage("pumpkin.png");
     imgPumpkin.resize(50, 50); 
 
+    imgBackground = loadImage("background.png");
+    imgBackground.resize(700, 400); 
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-	  background(0);
-    image(imgPumpkin, fltPumpkinX, fltPumpkinY);
+
+    image(imgBackground, fltBackgroundX, fltBackgroundY); // draw the background
+
+    image(imgPumpkin, fltPumpkinX, fltPumpkinY); 
    
-    fltPumpkinX += fltSpeedX;
-    fltPumpkinY += fltSpeedY;
+    fltPumpkinX += fltPumpSpeedX;
+    fltPumpkinY += fltPumpSpeedY;
     
     if (fltPumpkinX == 0 || fltPumpkinX > width - 50) {
-      fltSpeedX *= -1;
+      fltPumpSpeedX *= -1;
     }
     if (fltPumpkinY == 0  || fltPumpkinY > height - 50) {
-      fltSpeedY *= -1;
+      fltPumpSpeedY *= -1;
     }
 
+    fill(194, 99, 21); 
+    ellipse(fltCircleX, fltCircleY, 50, 50);
+
+    fltCircleY += fltCircleSpeedY;
+    
+    if (fltCircleY <= 25  || fltCircleY >= height - 25) {
+      fltCircleSpeedY *= -1;
+    }
+
+
+    
 }
   }
   
