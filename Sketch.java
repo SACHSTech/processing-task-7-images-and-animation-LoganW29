@@ -3,76 +3,77 @@ import processing.core.PImage;
 
 public class Sketch extends PApplet {
 	
+  // declaring and setting global variables 
 	PImage imgPumpkin; 
   PImage imgBackground; 
 
-  float fltPumpkinX = 100;
-  float fltPumpkinY = 100; 
+  float fltPumpkinX = 150;
+  float fltPumpkinY = 50; 
+
+  float fltPumpkinRadius;
+  float fltPumpkinAngle;
+  float fltPumpkinSpeed = (float) 0.05;
 
   float fltBackgroundX = 0;
   float fltBackgroundY = 0; 
-
+  
   float fltCircleX = 200; 
   float fltCircleY = 200;
-
-  float fltPumpSpeedX = 5; 
-  float fltPumpSpeedY = 4; 
-  
   float fltCircleSpeedY = 3; 
 
   /**
-   * Called once at the beginning of execution, put your size all in this method
+   * Indicating the size call 
    */
   public void settings() {
     size(400, 400);
   }
 
   /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
+   * The initial set up values here, 
+   * e.g. background, images, etc. 
    */
   public void setup() {
-
+    // loading the pumpkin image and resizing it
     imgPumpkin = loadImage("pumpkin.png");
     imgPumpkin.resize(50, 50); 
 
+    // loading the background and resizing it
     imgBackground = loadImage("background.png");
     imgBackground.resize(700, 400); 
   }
 
   /**
-   * Called repeatedly, anything drawn to the screen goes here
+   * Anything drawn to the screen.
+   * The background, pumpkin, and the ellipse.
+   * Calculates edge detection. 
    */
-  public void draw() {
+   public void draw() {
 
     image(imgBackground, fltBackgroundX, fltBackgroundY); // draw the background
-
-    image(imgPumpkin, fltPumpkinX, fltPumpkinY); 
+    image(imgPumpkin, fltPumpkinX, fltPumpkinY); // draw the pumpkin
    
-    fltPumpkinX += fltPumpSpeedX;
-    fltPumpkinY += fltPumpSpeedY;
-    
-    if (fltPumpkinX == 0 || fltPumpkinX > width - 50) {
-      fltPumpSpeedX *= -1;
-    }
-    if (fltPumpkinY == 0  || fltPumpkinY > height - 50) {
-      fltPumpSpeedY *= -1;
-    }
-
     fill(194, 99, 21); 
-    ellipse(fltCircleX, fltCircleY, 50, 50);
+    ellipse(fltCircleX, fltCircleY, 50, 50); // draw the circle
 
+    // Indicating basic edge detection and movement for the ellipse. 
     fltCircleY += fltCircleSpeedY;
-    
     if (fltCircleY <= 25  || fltCircleY >= height - 25) {
       fltCircleSpeedY *= -1;
     }
-
-
     
-}
+     // Draw and move the pumpkin in a circular motion. 
+     fltPumpkinX += width / 3 * cos(fltPumpkinAngle) * fltPumpkinSpeed;
+     fltPumpkinY += height / 3 * sin(fltPumpkinAngle) * fltPumpkinSpeed;
+ 
+     // Constrain pumpkin position to stay within the screen.
+     fltPumpkinX = constrain(fltPumpkinX, 0, width - 50);
+     fltPumpkinY = constrain(fltPumpkinY, 0, height - 50);
+     fltPumpkinAngle += fltPumpkinSpeed;
+
+   
   }
+}
   
-  // define other methods down here.
+
 
 
