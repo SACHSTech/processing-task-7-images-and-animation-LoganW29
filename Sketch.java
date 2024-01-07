@@ -1,6 +1,10 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * A program that has a bouncing circle, a pumpkin moving in a circular motion, and edge detection. 
+ * @author: L. Wong
+ */
 public class Sketch extends PApplet {
 	
   // declaring and setting global variables 
@@ -45,7 +49,7 @@ public class Sketch extends PApplet {
   /**
    * Anything drawn to the screen.
    * The background, pumpkin, and the ellipse.
-   * Calculates edge detection. 
+   * Calculates edge detection so that the ellipse and pumpkin do not move off the screen. 
    */
    public void draw() {
 
@@ -61,16 +65,14 @@ public class Sketch extends PApplet {
       fltCircleSpeedY *= -1;
     }
     
-     // Draw and move the pumpkin in a circular motion. 
-     fltPumpkinX += width / 3 * cos(fltPumpkinAngle) * fltPumpkinSpeed;
-     fltPumpkinY += height / 3 * sin(fltPumpkinAngle) * fltPumpkinSpeed;
+    // Draw and move the pumpkin in a circular motion. 
+    fltPumpkinX += width / 3 * cos(fltPumpkinAngle) * fltPumpkinSpeed;
+    fltPumpkinY += height / 3 * sin(fltPumpkinAngle) * fltPumpkinSpeed;
  
-     // Constrain pumpkin position to stay within the screen.
-     fltPumpkinX = constrain(fltPumpkinX, 0, width - 50);
-     fltPumpkinY = constrain(fltPumpkinY, 0, height - 50);
-     fltPumpkinAngle += fltPumpkinSpeed;
-
-   
+    // Constrain pumpkin position to stay within the screen.
+    fltPumpkinX = constrain(fltPumpkinX, 0, width - 50);
+    fltPumpkinY = constrain(fltPumpkinY, 0, height - 50);
+    fltPumpkinAngle += fltPumpkinSpeed;
   }
 }
   
